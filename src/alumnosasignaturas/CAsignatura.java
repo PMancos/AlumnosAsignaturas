@@ -18,7 +18,6 @@ public class CAsignatura {
     public CAsignatura(String nombre,double nota) {
         setNombre(nombre);
         setNota(nota);
-        
     }
 
     public CAsignatura(String nombre) {
@@ -44,6 +43,8 @@ public class CAsignatura {
     public void setNombre(String nombre) {
         if(nombre.length()>0){
         this.nombre = nombre;
+        }else{
+            System.out.println("El nombre esta vacio");
         }
     }
 

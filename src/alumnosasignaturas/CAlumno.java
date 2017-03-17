@@ -3,10 +3,11 @@
 package alumnosasignaturas;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 
 public class CAlumno {
-    
+    static Scanner tc=new Scanner(System.in);
     //Atributos
    private String dni;
    private String nombre;
@@ -19,6 +20,7 @@ public class CAlumno {
         setDni(dni);
         setNombre(nombre);
         this.direccion = direccion;
+        System.out.println("Objeto alumno creado");
         
     }
     //CONSTRUCTOR COPIA
@@ -29,22 +31,32 @@ public class CAlumno {
         setDireccion(alum.direccion);
         
         listaAsignaturas = new ArrayList<CAsignatura>();
-        
+        //copiar las asignaturas en la lista
         CAsignatura asig;
-        
         for(int i=0; i<alum.listaAsignaturas.size();i++){
+            //crear un objeto CAsignatura
+            //por medio del contructor copia
             asig=new CAsignatura(alum.listaAsignaturas.get(i));
             listaAsignaturas.add(asig);
+            //lo mismo en 1 linea
+            //listaAsig.add(new Casignatura(x.listaAsignatura));
         }
         
  }
 
     public CAsignatura obtenerAsignatura(int pos){
+        CAsignatura asig=null;
+        if(pos >= 0 && pos <listaAsignaturas.size())
+               asig=listaAsignaturas.get(pos);
+        else
+            System.out.println("Error, indice fuera de rango");
         
-        if(pos<listaAsignaturas.size()){ //size numero de contenido
-            return listaAsignaturas.get(pos);
-        }else
-            return null;
+        return asig;
+        
+//        if(pos<listaAsignaturas.size()){ //size numero de contenido
+//            return listaAsignaturas.get(pos);
+//        }else
+//            return null;
    }  
     
     public void aniadirAsignatura(CAsignatura a){
@@ -57,10 +69,12 @@ public class CAlumno {
     
     public double obtenerNotaMedia(){
         double sumaNotas=0;
-      for(int i=0; i<listaAsignaturas.size();i++){
+        if(numeroAsignaturas()>0){
+      for(int i=0; i<numeroAsignaturas();i++){
           
          sumaNotas+=listaAsignaturas.get(i).getNota();
-          
+      
+        }
       }
         return sumaNotas/numeroAsignaturas();
     }
@@ -78,9 +92,10 @@ public class CAlumno {
         else{
             
              System.out.println("DNI incorrecto. Introduce el DNI de nuevo:");
+             dni=tc.nextLine();
         }
          }while(dni.length()!=9);
-         
+         this.dni=dni;
     }
          
 
@@ -119,14 +134,13 @@ public class CAlumno {
     @Override
     public String toString() {
        String result;
-        result="DNI: "+dni+"   Nombre: "+nombre+"\nNº Asignaturas: "+listaAsignaturas.size()+"\n";
+        result="DNI: "+dni+"   Nombre: "+nombre+"\nNº Asignaturas: "+listaAsignaturas.size()+"\nDireccion: "+direccion+"\n";
                for(int i=0;i<listaAsignaturas.size();i++){
                    
                  result+=  listaAsignaturas.get(i).toString()+"\n";
                    
                }
                
-                 
                  return result+"Nota media: "+obtenerNotaMedia();
     }
     

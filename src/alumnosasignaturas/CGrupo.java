@@ -11,8 +11,8 @@ public class CGrupo {
 
   
     public CGrupo(String nombre) {
-        setNombre(nombre);
-       new ArrayList<CAlumno>(30);
+       setNombre(nombre);
+       alumnos=new ArrayList<CAlumno>(30);
         
     }
 
@@ -45,6 +45,19 @@ public class CGrupo {
         return alumnos.size();
     }
     
+    public void mostrarDatosGrupo(){
+        System.out.println("nombre del grupo: "+nombre);
+        System.out.println("numero de alumnos: "+numeroAlumnos());
+        
+        for(int i=0; i<numeroAlumnos();i++){
+            System.out.println("Alumno "+(i+1));
+        System.out.println(alumnos.get(i).toString());
+        }
+    }
+
+    public ArrayList<CAlumno> getAlumnos() {
+        return alumnos;
+    }
     
     
 }
